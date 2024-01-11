@@ -13,7 +13,7 @@ class ColorPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ColorPolicy
      */
     public function view(User $user, Color $color): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ColorPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class ColorPolicy
      */
     public function update(User $user, Color $color): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class ColorPolicy
      */
     public function delete(User $user, Color $color): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ColorPolicy
      */
     public function restore(User $user, Color $color): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class ColorPolicy
      */
     public function forceDelete(User $user, Color $color): bool
     {
-        //
+        return true;
     }
 }

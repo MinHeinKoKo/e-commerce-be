@@ -41,7 +41,7 @@ return new class extends Migration
                     'password' => Hash::make("password"),
                     'phone' => "+22-123-456-789",
                     'address' => "editor city",
-                    'role' => 'editor',
+                    'role' => 'admin',
                     'is_active' => true,
                     'created_at' => Carbon::now()
                 ],

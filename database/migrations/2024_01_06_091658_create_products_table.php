@@ -19,10 +19,12 @@ return new class extends Migration
             $table->text("excerpt");
             $table->decimal("price", 8, 2);
             $table->integer("quantity");
+            $table->boolean("is_published")->default(true);
+            $table->boolean("is_visible")->default(true);
             $table->foreignId("category_id")->constrained("categories")->cascadeOnDelete();
             $table->foreignId("color_id")->constrained("colors")->cascadeOnDelete();
             $table->foreignId("size_id")->constrained("sizes")->cascadeOnDelete();
-            $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
+//            $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
             $table->timestamps();
         });
     }

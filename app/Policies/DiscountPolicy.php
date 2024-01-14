@@ -13,7 +13,7 @@ class DiscountPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,8 @@ class DiscountPolicy
      */
     public function view(User $user, Discount $discount): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -29,7 +30,8 @@ class DiscountPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -37,7 +39,8 @@ class DiscountPolicy
      */
     public function update(User $user, Discount $discount): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -45,7 +48,8 @@ class DiscountPolicy
      */
     public function delete(User $user, Discount $discount): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -53,7 +57,8 @@ class DiscountPolicy
      */
     public function restore(User $user, Discount $discount): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -61,6 +66,7 @@ class DiscountPolicy
      */
     public function forceDelete(User $user, Discount $discount): bool
     {
-        //
+        return true;
+
     }
 }

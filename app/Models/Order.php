@@ -20,4 +20,9 @@ class Order extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function receipts()
+    {
+        return $this->belongsToMany(Receipt::class, 'order_receipt','order_id','receipt_id');
+    }
 }

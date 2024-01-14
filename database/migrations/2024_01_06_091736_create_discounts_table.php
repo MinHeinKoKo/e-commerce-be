@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('description');
             $table->enum('discount_type', ['percentage', 'fixed_amount']);
-            $table->decimal('discount_amount', 8, 2);
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('expires_at')->nullable();
+            $table->decimal('amount', 8, 2)->nullable();
+            $table->date('start_at')->nullable();
+            $table->date('expires_at')->nullable();
             $table->unsignedInteger('max_uses')->nullable();
             $table->unsignedInteger('uses')->default(0);
-            $table->enum("status",[0,1])->default(0);
+            $table->boolean("status")->default(true);
             $table->boolean("is_visible")->default(true);
             $table->timestamps();
         });

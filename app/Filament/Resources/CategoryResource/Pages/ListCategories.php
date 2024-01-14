@@ -10,6 +10,11 @@ class ListCategories extends ListRecords
 {
     protected static string $resource = CategoryResource::class;
 
+    protected function getHeaderWidgets(): array
+    {
+        return CategoryResource::getWidgets();
+    }
+
     protected function getHeaderActions(): array
     {
         return [

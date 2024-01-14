@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Filament\Resources\CategoryResource\Widgets\CategoryOverview;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -75,6 +76,13 @@ class CategoryResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            CategoryOverview::class
+        ];
     }
 
     public static function getRelations(): array

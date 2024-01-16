@@ -9,6 +9,7 @@ use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -89,7 +90,17 @@ class ProductResource extends Resource
                         ->required()
                         ->columnSpanFull(),
                 ]),
+                    Forms\Components\FileUpload::make('url')
+                        ->label("Image for the product")
+                        ->columnSpanFull()
+                        ->required()
+                    ->hiddenLabel(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::query()->where('is_visible',1)->orderBy('quantity','ASC');
     }
 
     public static function table(Table $table): Table
@@ -98,6 +109,8 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make("image")
+                ->defaultImageUrl("http://127.0.0.1:8000/"."image.url"),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.title')

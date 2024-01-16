@@ -27,7 +27,7 @@ class ResponseHelper
         );
     }
 
-    public static function getPaginationMeta(LengthAwarePaginator $data)
+    public static function getPaginationMeta($data)
     {
         return [
             'currentPage' => $data->currentPage(),

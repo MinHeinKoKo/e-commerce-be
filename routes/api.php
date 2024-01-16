@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\App\ColorApiController;
+use App\Http\Controllers\Api\App\ProductApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [RegisterController::class, 'register'])->name("auth.register");
 Route::post('/login', [LoginController::class,'login'])->name('auth.login');
 Route::post('/logout',[LogoutController::class, 'logout'])->name('auth.logout');
+
+Route::apiResource('/products',ProductApiController::class);
 
 Route::middleware('auth:sanctum')->group(function (){
     Route::apiResource('/colors', ColorApiController::class);

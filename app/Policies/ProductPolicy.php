@@ -8,6 +8,13 @@ use Illuminate\Auth\Access\Response;
 
 class ProductPolicy
 {
+    public function before(User $user)
+    {
+        if ($user->isAdmin() || $user->isEditor()){
+            return true;
+        }
+        return null;
+    }
     /**
      * Determine whether the user can view any models.
      */
@@ -29,7 +36,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -37,7 +44,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -45,7 +52,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -53,7 +60,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -61,6 +68,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return true;
+        return false;
     }
 }

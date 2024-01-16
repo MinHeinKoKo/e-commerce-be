@@ -12,7 +12,9 @@ class ProductRepository implements ProductInterface
 
     public function fetchAllProducts(int $limit, int $page)
     {
-        return Product::when(request('keyword'), function($q){
+        return Product::where('quantity',">",5)
+            ->where('is_published',1)->where('is_visible',1)
+            ->when(request('keyword'), function($q){
             $keyword = request('keyword');
             $q->orWhere('name',"LIKE","%$keyword%")
                 ->orWhere('description', "LIKE", "%$keyword%");

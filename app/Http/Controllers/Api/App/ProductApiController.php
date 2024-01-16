@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\App;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\UseCases\App\Product\ProductAction;
@@ -35,8 +36,9 @@ class ProductApiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
+        $this->authorize('create', Product::class);
         $this->productAction->store($request->all());
         return ResponseHelper::success("Successfully created",null, Response::HTTP_CREATED);
     }
@@ -52,8 +54,9 @@ class ProductApiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
+        $this->authorize('update',Product::class);
         $this->productAction->update($request->all(),$product);
         return ResponseHelper::success("Successfully updated",null, Response::HTTP_CREATED);
     }
@@ -63,6 +66,7 @@ class ProductApiController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete',Product::class);
         $this->productAction->delete($product);
         return ResponseHelper::success("Successfully Deleted",null, Response::HTTP_OK);
 

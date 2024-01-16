@@ -16,9 +16,9 @@ class VerifyIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->email === "admin@e-commerce.com" || Auth::user()->email === "editor@e-commerce.com"){
-        return $next($request);
+        if (Auth::user() && (Auth::user()->email === "admin@e-commerce.com" || Auth::user()->email === "editor@e-commerce.com")){
+            return $next($request);
         }
-        return abort(403, "You don't have permission to access this.");
+        return redirect('/login');
     }
 }

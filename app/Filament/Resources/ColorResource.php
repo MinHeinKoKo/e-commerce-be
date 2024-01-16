@@ -6,8 +6,12 @@ use App\Filament\Resources\ColorResource\Pages;
 use App\Filament\Resources\ColorResource\RelationManagers;
 use App\Filament\Resources\ColorResource\Widgets\ColorStatsOverview;
 use App\Models\Color;
+use Filament\Actions\DeleteAction;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -72,12 +76,24 @@ class ColorResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist->schema([
+            Section::make('Color Information')
+            ->schema([
+                TextEntry::make('colorName')->label('Color Name'),
+                TextEntry::make('hexCode')
+            ])->columns(2)
+        ]);
     }
 
     public static function getRelations(): array
@@ -99,7 +115,7 @@ class ColorResource extends Resource
         return [
             'index' => Pages\ListColors::route('/'),
             'create' => Pages\CreateColor::route('/create'),
-            'view' => Pages\ViewColor::route('/{record}'),
+//            'view' => Pages\ViewColor::route('/{record}'),
             'edit' => Pages\EditColor::route('/{record}/edit'),
         ];
     }

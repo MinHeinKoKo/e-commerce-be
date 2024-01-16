@@ -31,6 +31,9 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->brandName("M1n's Shop")
+            ->brandLogo(asset('/images/trans-logo.png'))
+            ->favicon(asset('/images/trans-logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -51,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-//                VerifyIsAdmin::class
+                VerifyIsAdmin::class
             ])
             ->authMiddleware([
                 Authenticate::class,

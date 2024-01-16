@@ -11,6 +11,14 @@ class ColorPolicy
     /**
      * Determine whether the user can view any models.
      */
+
+    public function before(User $user)
+    {
+        if ($user->isAdmin()){
+            return true;
+        }
+        return null;
+    }
     public function viewAny(User $user): bool
     {
         return true;
@@ -29,15 +37,15 @@ class ColorPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->isEditor();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Color $color): bool
+    public function update(User $user , Color $color): bool
     {
-        return true;
+        return $user->isEditor();
     }
 
     /**
@@ -45,7 +53,7 @@ class ColorPolicy
      */
     public function delete(User $user, Color $color): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -61,6 +69,6 @@ class ColorPolicy
      */
     public function forceDelete(User $user, Color $color): bool
     {
-        return true;
+        return false;
     }
 }

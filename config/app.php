@@ -169,7 +169,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \App\Providers\ColorServiceProvider::class
+        \App\Providers\ColorServiceProvider::class,
+        \App\Providers\ProductServiceProvider::class
     ])->toArray(),
 
     /*

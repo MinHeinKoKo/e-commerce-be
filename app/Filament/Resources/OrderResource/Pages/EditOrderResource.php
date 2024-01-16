@@ -65,7 +65,7 @@ class EditOrderResource extends EditRecord
                             ->required(),
                         Select::make('process')
                             ->options([
-                                'Pending','Denied','Approved'
+                                'Pending','Denied','Approved','Cancel'
                             ])
                             ->native(true)
                             ->searchable()

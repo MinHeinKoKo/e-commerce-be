@@ -99,11 +99,13 @@ class OrderResource extends Resource
                         'heroicon-o-forward' => 'Pending',
                         'heroicon-o-x-circle' => 'Denied',
                         'heroicon-o-check-circle' => 'Approved',
+                        'heroicon-o-check' => 'Cancel',
                     ])
                     ->colors([
                         'secondary' => 'Pending',
                         'warning' => 'Denied',
                         'success' => 'Approved',
+                        'info' => 'Cancel'
                     ]),
                     TextColumn::make('created_at')
                         ->label('Created At')

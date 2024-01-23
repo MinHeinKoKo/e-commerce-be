@@ -13,31 +13,22 @@ class CreateProduct extends CreateRecord
 {
     protected static string $resource = ProductResource::class;
 
-    protected function handleRecordCreation(array $data): Model
-    {
-        $image = $data['url'];
-        unset($data['url']);
-        $product = Product::create($data);
-        $product->image()->create([
-            "url" => $image
-        ]);
+//    protected function handleRecordCreation(array $data): Model
+//    {
+//        $image = $data['url'];
+//        unset($data['url']);
+//        $product = Product::create($data);
+//        $product->image()->create([
+//            "url" => $image
+//        ]);
+//
+//        Notification::make()
+//            ->title('New Product Is Created')
+//            ->icon('heroicon-o-shopping-bag')
+//            ->body("** {$product->name} is created **")
+//            ->sendToDatabase(auth()->user());
+//
+//        return $product;
+//    }
 
-        Notification::make()
-            ->title('New Product Is Created')
-            ->icon('heroicon-o-shopping-bag')
-            ->body("** {$product->name} is created **")
-            ->actions([
-                Action::make('view')
-                    ->button(),
-            ])
-            ->sendToDatabase(auth()->user());
-
-        return $product;
-    }
-
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
-    }
 }

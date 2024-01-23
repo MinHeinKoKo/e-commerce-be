@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text("excerpt");
             $table->decimal("price", 8, 2);
             $table->integer("quantity");
+            $table->string("image")->nullable();
             $table->boolean("is_published")->default(true);
             $table->boolean("is_visible")->default(true);
             $table->foreignId("category_id")->constrained("categories")->cascadeOnDelete();

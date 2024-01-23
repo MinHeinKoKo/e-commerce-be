@@ -8,6 +8,7 @@ use App\Filament\Resources\ProductResource\Widgets\ProductStatsOverview;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\Page;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables;
@@ -90,9 +91,10 @@ class ProductResource extends Resource
                         ->required()
                         ->columnSpanFull(),
                 ]),
-                    Forms\Components\FileUpload::make('url')
+                    Forms\Components\FileUpload::make('image')
                         ->label("Image for the product")
                         ->columnSpanFull()
+                        ->image()->imageEditor()
                         ->required()
                     ->hiddenLabel(),
             ]);
@@ -109,8 +111,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\ImageColumn::make("image")
-                ->defaultImageUrl("http://127.0.0.1:8000/"."image.url"),
+                Tables\Columns\ViewColumn::make('image')->view('tables.columns.image-viewer'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.title')
@@ -174,6 +175,7 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'view' => Pages\ViewProduct::route('/{record}'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
+//            'edit' => Pages\EditProductResource::route('/{record}/edit')
         ];
     }
 }

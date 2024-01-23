@@ -8,32 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "name", "slug",
+        "description","excerpt",
+        "price", "quantity",
+        "image" , "is_published",
+        "is_visible", "category_id",
+        "color_id", "size_id"
+    ];
 
-    protected $fillable = ['category_id','size_id','color_id','is_published','user_id','name','slug','description','excerpt','price','quantity'];
+    public function color()
+    {
+        return $this->belongsTo(Color::class, "color_id");
+    }
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, "category_id");
     }
 
     public function size()
     {
-        return $this->belongsTo(Size::class, 'size_id');
+        return $this->belongsTo(Size::class, "size_id");
     }
-
-    public function color()
-    {
-        return $this->belongsTo(Color::class, 'color_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
 }

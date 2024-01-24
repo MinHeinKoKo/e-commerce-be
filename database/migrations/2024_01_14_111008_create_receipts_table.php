@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('receipts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->enum("process",["Pending","Approved", "Denied","Cancel"])->default('Pending');
             $table->decimal('total',10,2);
             $table->timestamps();
         });

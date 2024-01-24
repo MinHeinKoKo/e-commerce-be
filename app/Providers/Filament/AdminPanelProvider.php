@@ -57,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 VerifyIsAdmin::class
             ])
             ->databaseNotifications()
+            ->databaseNotificationsPolling('2s')
             ->authMiddleware([
                 Authenticate::class,
             ]);

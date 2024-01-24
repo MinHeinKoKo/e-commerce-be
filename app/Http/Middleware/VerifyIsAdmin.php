@@ -19,6 +19,6 @@ class VerifyIsAdmin
         if (Auth::user() && (Auth::user()->email === "admin@e-commerce.com" || Auth::user()->email === "editor@e-commerce.com")){
             return $next($request);
         }
-        return redirect('/login');
+        return redirect('/admin/login');
     }
 }

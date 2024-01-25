@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\App\ColorApiController;
 use App\Http\Controllers\Api\App\ProductApiController;
+use App\Http\Controllers\Api\App\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,5 @@ Route::apiResource('/products',ProductApiController::class);
 
 Route::middleware('auth:sanctum')->group(function (){
     Route::apiResource('/colors', ColorApiController::class);
+    Route::apiResource('/orders', OrderController::class);
 });

@@ -4,9 +4,12 @@
 namespace App\Repositories\App\Order;
 
 
+use App\Helpers\ResponseHelper;
 use App\Interfaces\App\Order\OrderInterface;
+use App\Jobs\OrderJob;
 use App\Models\Order;
 use App\Services\Order\OrderService;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class OrderRepository implements OrderInterface
@@ -25,7 +28,8 @@ class OrderRepository implements OrderInterface
 
     public function store(array $data)
     {
-        return OrderService::calculateTotalPrice($data);
+        dispatch(new OrderJob($data , Auth::id()));
+        return ResponseHelper::success("Wait for moment", null , Response::HTTP_OK);
     }
 
     public function update(Order $order)

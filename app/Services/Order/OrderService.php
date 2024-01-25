@@ -20,10 +20,12 @@ class OrderService
     private static $total = 0;
     private static $orderIdLists = [];
 
-    public static function calculateTotalPrice(array $orderItems)
+    public static function calculateTotalPrice(array $orderItems , $userId)
     {
         try {
             DB::beginTransaction();
+
+            $user = User::find($userId);
 
             foreach ($orderItems as $item) {
                 $productId = $item['product_id'];
@@ -31,7 +33,7 @@ class OrderService
 
                 $product = Product::find($productId);
 
-                $orderId = self::storeInOrder($product, $qty);
+                $orderId = self::storeInOrder($product, $qty , $userId);
 
                 if (!in_array($orderId, self::$orderIdLists)) {
                     self::$orderIdLists[] = $orderId;
@@ -44,13 +46,13 @@ class OrderService
                 self::calculateTotal($product, $qty);
             }
 
-            $receipt = self::storeInReceipt();
+            $receipt = self::storeInReceipt($userId);
 
             self::storeInPivot($receipt);
 
             $admin = self::admins();
 
-            Notification::send($admin, new OrderNotification($receipt, Auth::user()));
+            Notification::send($admin, new OrderNotification($receipt, $user));
 
             DB::commit();
 
@@ -62,21 +64,22 @@ class OrderService
         }
     }
 
-    public static function storeInOrder(Product $product , int $qty)
+    public static function storeInOrder(Product $product , int $qty , $userId)
     {
         $order = new Order();
-        $order->user_id = Auth::id();
+        $order->user_id = $userId;
         $order->product_id = $product->id;
         $order->quantity = $qty;
         $order->price = $product->price * $qty;
         $order->save();
+        $product->update(["quantity" => $product->quantity - $qty]);
         return $order->id;
     }
 
-    public static function storeInReceipt()
+    public static function storeInReceipt(int $userId)
     {
         return Receipt::create([
-            "user_id" => Auth::id(),
+            "user_id" => $userId,
             "total" => self::$total
         ]);
     }

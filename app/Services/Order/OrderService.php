@@ -53,6 +53,7 @@ class OrderService
             $admin = self::admins();
 
             Notification::send($admin, new OrderNotification($receipt, $user));
+            self::createFilamentNotification($user);
 
             DB::commit();
 
@@ -62,6 +63,17 @@ class OrderService
             // Log or handle the exception as needed
             return ResponseHelper::fail("An error occurred during order processing.", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public static function createFilamentNotification(User $user)
+    {
+        return \Filament\Notifications\Notification::make()
+            ->title("Order")
+            ->body($user->name." is ordering")
+            ->icon('heroicon-o-users')
+            ->iconColor("success")
+            ->sendToDatabase($user)
+            ->send();
     }
 
     public static function storeInOrder(Product $product , int $qty , $userId)

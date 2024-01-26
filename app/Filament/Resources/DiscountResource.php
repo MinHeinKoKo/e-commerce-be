@@ -130,7 +130,7 @@ class DiscountResource extends Resource
                     ->boolean()
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-mark')
-                    ->label('Active'),
+                    ->label('Visible'),
                 TextColumn::make('created_at')
                     ->label('Created At')
                     ->toggleable(isToggledHiddenByDefault: true)

@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Services\Order;
 
-
 use App\Helpers\ResponseHelper;
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Receipt;
@@ -13,6 +12,7 @@ use App\Notifications\OrderNotification;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class OrderService
@@ -20,7 +20,7 @@ class OrderService
     private static $total = 0;
     private static $orderIdLists = [];
 
-    public static function calculateTotalPrice(array $orderItems , $userId)
+    public static function calculateTotalPrice(array $orderItems, $userId, $time)
     {
         try {
             DB::beginTransaction();
@@ -33,7 +33,7 @@ class OrderService
 
                 $product = Product::find($productId);
 
-                $orderId = self::storeInOrder($product, $qty , $userId);
+                $orderId = self::storeInOrder($product, $qty, $userId);
 
                 if (!in_array($orderId, self::$orderIdLists)) {
                     self::$orderIdLists[] = $orderId;
@@ -45,6 +45,8 @@ class OrderService
 
                 self::calculateTotal($product, $qty);
             }
+
+            self::isActiveDiscountCoupon($time);
 
             $receipt = self::storeInReceipt($userId);
 
@@ -59,6 +61,7 @@ class OrderService
 
             return self::$total;
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             DB::rollBack();
             // Log or handle the exception as needed
             return ResponseHelper::fail("An error occurred during order processing.", Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -69,14 +72,14 @@ class OrderService
     {
         return \Filament\Notifications\Notification::make()
             ->title("Order")
-            ->body($user->name." is ordering")
+            ->body($user->name . " is ordering")
             ->icon('heroicon-o-users')
             ->iconColor("success")
             ->sendToDatabase($user)
             ->send();
     }
 
-    public static function storeInOrder(Product $product , int $qty , $userId)
+    public static function storeInOrder(Product $product, int $qty, $userId)
     {
         $order = new Order();
         $order->user_id = $userId;
@@ -86,6 +89,20 @@ class OrderService
         $order->save();
         $product->update(["quantity" => $product->quantity - $qty]);
         return $order->id;
+    }
+
+    public static function isActiveDiscountCoupon($time)
+    {
+        // Adjust this logic based on your Discount model structure
+        $discount = Discount::where('start_at', '<=', $time)
+            ->where('expires_at', '>=', $time)
+            ->where('status', true)
+            ->first();
+
+        if ($discount) {
+            $dAmount = $discount->amount;
+            self::$total -= self::$total * ($dAmount / 100);
+        }
     }
 
     public static function storeInReceipt(int $userId)
@@ -116,5 +133,4 @@ class OrderService
     {
         return User::where("role", "admin")->get();
     }
-
 }

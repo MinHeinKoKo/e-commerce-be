@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class OrderJob implements ShouldQueue
 {
@@ -16,13 +17,15 @@ class OrderJob implements ShouldQueue
 
     public $data;
     public $userId;
+    public $time;
     /**
      * Create a new job instance.
      */
-    public function __construct(array $data, int $userId)
+    public function __construct(array $data, int $userId , $time)
     {
         $this->data = $data;
         $this->userId = $userId;
+        $this->time = $time;
     }
 
     /**
@@ -30,6 +33,7 @@ class OrderJob implements ShouldQueue
      */
     public function handle(): void
     {
-        OrderService::calculateTotalPrice($this->data , $this->userId);
+        Log::info("Order queue is running.");
+        OrderService::calculateTotalPrice($this->data , $this->userId , $this->time);
     }
 }

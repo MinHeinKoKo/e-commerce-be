@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->email === "editor@e-commerce.com";
     }
+
+    public function getOrderCount()
+    {
+        return Order::where("user_id",$this->id)->count();
+    }
 }

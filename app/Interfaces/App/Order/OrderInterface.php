@@ -10,8 +10,4 @@ interface OrderInterface {
     public function fetchSingle(int $id);
 
     public function store(array $data);
-
-    public function update(Order $order);
-
-    public function delete(Order $order);
 }

@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin()
+    {
+        return $this->email === "admin@e-commerce.com";
+    }
+
+    public function isEditor()
+    {
+        return $this->email === "editor@e-commerce.com";
+    }
 }

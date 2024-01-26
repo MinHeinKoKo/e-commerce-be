@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    const ROlE_ADMIN = "admin";
+    const ROLE_USER = "user";
+    const ROLE_EDITOR = "editor";
     /**
      * Run the migrations.
      */
@@ -16,7 +19,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string("email_verification_token")->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->boolean('is_visible')->default(true);
+            $table->boolean('is_active')->default(false);
+            $table->string("role")->default(self::ROLE_USER)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

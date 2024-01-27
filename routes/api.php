@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\App\ColorApiController;
 use App\Http\Controllers\Api\App\ProductApiController;
 use App\Http\Controllers\Api\App\OrderController;
+use App\Http\Controllers\Api\App\Guest\DiscountApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name("auth.re
 Route::post('/login', [LoginController::class,'login'])->name('auth.login');
 Route::post('/logout',[LogoutController::class, 'logout'])->name('auth.logout');
 
+Route::get('/discounts', [DiscountApiController::class , 'index']);
 Route::apiResource('/products',ProductApiController::class);
 
 Route::middleware('auth:sanctum')->group(function (){

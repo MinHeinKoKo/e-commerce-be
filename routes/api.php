@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\App\ColorApiController;
 use App\Http\Controllers\Api\App\ProductApiController;
 use App\Http\Controllers\Api\App\OrderController;
 use App\Http\Controllers\Api\App\Guest\DiscountApiController;
+use App\Http\Controllers\Api\App\Guest\GeneralApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::post('/login', [LoginController::class,'login'])->name('auth.login');
 Route::post('/logout',[LogoutController::class, 'logout'])->name('auth.logout');
 
 Route::get('/discounts', [DiscountApiController::class , 'index']);
+Route::get('/most-sell-products', [GeneralApiController::class, 'fetchMostSellItems']);
 Route::apiResource('/products',ProductApiController::class);
 
 Route::middleware('auth:sanctum')->group(function (){

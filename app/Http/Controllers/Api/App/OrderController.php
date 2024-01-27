@@ -6,10 +6,13 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Http\Resources\ReceiptResource;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\Receipt;
 use App\Rules\CheckOrderQuantity;
 use App\UseCases\App\Order\OrderAction;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,9 +49,10 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Order $order)
     {
-        //
+        $receipt = $this->orderAction->fetchSingleReceipt($order);
+        return ResponseHelper::success("fetched Successfully", ReceiptResource::collection($receipt) , Response::HTTP_OK);
     }
 
 }

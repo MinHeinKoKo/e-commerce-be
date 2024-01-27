@@ -33,4 +33,5 @@ Route::apiResource('/products',ProductApiController::class);
 Route::middleware('auth:sanctum')->group(function (){
     Route::apiResource('/colors', ColorApiController::class);
     Route::apiResource('/orders', OrderController::class);
+//    Route::get('/receipts/{receipt}', [OrderController::class, 'show']);
 });

@@ -5,6 +5,8 @@ namespace App\UseCases\App\Order;
 
 
 use App\Interfaces\App\Order\OrderInterface;
+use App\Models\Order;
+use App\Models\Receipt;
 
 class OrderAction
 {
@@ -25,5 +27,10 @@ class OrderAction
     public function store(array $data)
     {
         return $this->orderRepository->store($data);
+    }
+
+    public function fetchSingleReceipt(Order $order)
+    {
+        return $this->orderRepository->fetchSingle($order);
     }
 }

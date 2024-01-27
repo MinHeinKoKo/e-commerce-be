@@ -23,9 +23,9 @@ class OrderRepository implements OrderInterface
         return Receipt::where("user_id" , $userId )->paginate($limit , ["*"] , "page" , $page)->withQueryString();
     }
 
-    public function fetchSingle(int $id)
+    public function fetchSingle(Order $order)
     {
-        return Order::find($id);
+        return $order->receipts;
     }
 
     public function store(array $data)

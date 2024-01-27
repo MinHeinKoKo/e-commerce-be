@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
+use App\Http\Resources\ReceiptResource;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Receipt;
 use App\Rules\CheckOrderQuantity;
 use App\UseCases\App\Order\OrderAction;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -23,7 +31,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = $this->orderAction->fetchAll();
+        return response()->json([
+            "message" => "successfully fetched",
+            "data" => ReceiptResource::collection($orders),
+            "meta" => ResponseHelper::getPaginationMeta($orders)
+        ],200);
     }
 
     /**
@@ -37,24 +50,10 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Order $order)
     {
-        //
+        $receipt = $this->orderAction->fetchSingleReceipt($order);
+        return ResponseHelper::success("fetched Successfully", ReceiptResource::collection($receipt) , Response::HTTP_OK);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

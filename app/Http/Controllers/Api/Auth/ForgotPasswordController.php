@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendPasswordResetCode;
 use App\Models\PasswordResetCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,6 +20,6 @@ class ForgotPasswordController extends Controller
         $code = mt_rand(100000 , 999999);
         $data["code"] = $code;
         $resetCode = PasswordResetCode::create($data);
-        Mail::to($request->email)->queue()
+        Mail::to($request->email)->queue(new SendPasswordResetCode($resetCode->code));
     }
 }

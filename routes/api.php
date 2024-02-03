@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\App\ColorApiController;
 use App\Http\Controllers\Api\App\ProductApiController;
 use App\Http\Controllers\Api\App\OrderController;
 use App\Http\Controllers\Api\App\Guest\DiscountApiController;
+use App\Http\Controllers\Api\App\Guest\GeneralApiController;
+use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +30,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [RegisterController::class, 'register'])->name("auth.register");
 Route::post('/login', [LoginController::class,'login'])->name('auth.login');
 Route::post('/logout',[LogoutController::class, 'logout'])->name('auth.logout');
+Route::post('/password/email',  [ForgotPasswordController::class, 'sendResetMail']);
+Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword']);
 
 Route::get('/discounts', [DiscountApiController::class , 'index']);
+Route::get('/most-sell-products', [GeneralApiController::class, 'fetchMostSellItems']);
+Route::get('/categories' , [GeneralApiController::class , 'fetchAllCategories']);
 Route::apiResource('/products',ProductApiController::class);
 
 Route::middleware('auth:sanctum')->group(function (){

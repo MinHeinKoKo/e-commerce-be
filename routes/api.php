@@ -32,6 +32,7 @@ Route::post('/logout',[LogoutController::class, 'logout'])->name('auth.logout');
 
 Route::get('/discounts', [DiscountApiController::class , 'index']);
 Route::get('/most-sell-products', [GeneralApiController::class, 'fetchMostSellItems']);
+Route::get('/categories' , [GeneralApiController::class , 'fetchAllCategories']);
 Route::apiResource('/products',ProductApiController::class);
 
 Route::middleware('auth:sanctum')->group(function (){

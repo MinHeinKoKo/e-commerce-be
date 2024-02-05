@@ -18,7 +18,7 @@ class GeneralRepository implements GeneralInterface
             ->leftJoin("orders", "products.id" , "=", "orders.product_id")
             ->groupBy("products.id")
             ->orderBy("total_orders" , "DESC")
-            ->limit(10)
+            ->limit(8)
             ->get();
     }
 

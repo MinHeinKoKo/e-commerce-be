@@ -18,7 +18,14 @@ class ProductRepository implements ProductInterface
             $keyword = request('keyword');
             $q->orWhere('name',"LIKE","%$keyword%")
                 ->orWhere('description', "LIKE", "%$keyword%");
-            })->paginate($limit, ['*'],'page',$page)->withQueryString();
+            })
+            ->when(request()->has('categoryName') && request('categoryName') !== null , function ($c) {
+                $category = request("categoryName");
+                $c->whereHas("category" , function ($q) use($category){
+                    $q->where("slug" , $category);
+                });
+            })
+            ->paginate($limit, ['*'],'page',$page)->withQueryString();
     }
 
     public function fetchSingleProducts(Product $product)

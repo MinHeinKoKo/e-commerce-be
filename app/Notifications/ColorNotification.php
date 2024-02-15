@@ -51,7 +51,7 @@ class ColorNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            "user" => $this->user
+            "user" => $this->user ,
         ];
     }
 }

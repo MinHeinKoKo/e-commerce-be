@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\Auth\AppLoginRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\Auth\AdminResource;
 use App\Http\Resources\Auth\UserResoure;
@@ -26,7 +27,7 @@ class LoginController
     const ROLE_USER = "user";
     const ROLE_EDITOR = "editor";
 
-    public function login(LoginRequest $request)
+    public function login(AppLoginRequest $request)
     {
         try {
             if(Auth::attempt($request->only('email','password'))){

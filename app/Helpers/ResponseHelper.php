@@ -4,6 +4,8 @@
 namespace App\Helpers;
 
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class ResponseHelper
 {
     public static function success($message = "Successful", $data = null, $status = 200)

@@ -23,6 +23,8 @@ class ProductResource extends JsonResource
             'excerpt' => $this->excerpt,
             'price' => $this->price,
             'quantity' => $this->quantity,
+            'isDiscount' => $this->isDiscounted(),
+            "discountPrice" => $this->calculateDiscountPrice(),
             'qty' => 1,
             'category' => $this->category->title,
             'size' => $this->size->sizeName,

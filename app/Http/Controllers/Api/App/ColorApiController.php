@@ -26,7 +26,12 @@ class ColorApiController extends Controller
     public function index()
     {
         $data = $this->colorAction->fetchAllColors();
-        return ResponseHelper::success('Fetched Successfully.', ColorResource::collection($data) , Response::HTTP_OK);
+        return response()->json([
+            "message" => "Fetched Successfully.",
+            "data" => ColorResource::collection($data),
+            "meta" => ResponseHelper::getPaginationMeta($data)
+        ], Response::HTTP_OK);
+//        return ResponseHelper::success('Fetched Successfully.', ColorResource::collection($data) , Response::HTTP_OK);
     }
 
     /**

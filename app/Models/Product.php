@@ -31,4 +31,20 @@ class Product extends Model
     {
         return $this->belongsTo(Size::class, "size_id");
     }
+    public function isDiscounted()
+    {
+        return Discount::where('status', 1)->exists();
+    }
+    public function calculateDiscountPrice()
+    {
+        $discount = Discount::where("status",1)->where(function ($query){
+            $query->orWhere("expires_at", ">", now());
+        })->first();
+
+        if ($discount){
+            $discountAmount = $this->price * ( $discount->discount_amount /100 ) ;
+            return round( $this->price - $discountAmount , 2);
+        }
+        return $this->price;
+    }
 }

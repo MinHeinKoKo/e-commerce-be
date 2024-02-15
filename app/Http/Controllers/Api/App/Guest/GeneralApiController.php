@@ -24,11 +24,7 @@ class GeneralApiController extends Controller
     public function fetchMostSellItems()
     {
         $data = $this->generalAction->fetchMostSellItems();
-        return response()->json([
-            "message" => "fetched successfully",
-            "data" => ProductResource::collection($data),
-            "meta" => ResponseHelper::getPaginationMeta($data)
-        ], Response::HTTP_OK);
+        return ResponseHelper::success("fetched successfully", ProductResource::collection($data), Response::HTTP_OK);
     }
 
     public function fetchAllCategories()

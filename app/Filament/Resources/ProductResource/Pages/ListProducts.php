@@ -35,6 +35,9 @@ class ListProducts extends ListRecords
             'Visible' => Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('is_visible', true))
                 ->badge(Product::query()->where('is_visible', true)->count()),
+            'Low Quantity' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('quantity', "<=" , 20))
+                ->badge(Product::query()->where('quantity', "=" , 20)->count())->badgeColor('danger'),
         ];
     }
 }

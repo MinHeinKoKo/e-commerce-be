@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProductResource\Widgets;
 
+use App\Models\Product;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -10,8 +11,8 @@ class ProductStatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Unique views', '192.1k')
-                ->description('32k increase')
+            Stat::make('Total Products', Product::count())
+                ->description('Here are total products')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),
             Stat::make('Bounce rate', '21%')

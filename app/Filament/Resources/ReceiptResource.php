@@ -32,6 +32,10 @@ class ReceiptResource extends Resource
     {
         return static::getModel()::count();
     }
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {
@@ -128,8 +132,9 @@ class ReceiptResource extends Resource
         return [
             'index' => Pages\ListReceipts::route('/'),
             'create' => Pages\CreateReceipt::route('/create'),
-//            'view' => Pages\ViewReceipt::route('/{record}'),
-            'edit' => Pages\EditReceipt::route('/{record}/edit'),
+            'view' => Pages\ViewReceipt::route('/{record}'),
+//            'edit' => Pages\EditReceipt::route('/{record}/edit'),
+            'edit' => Pages\EditReceiptsPage::route('/{record}/edit'),
         ];
     }
 }

@@ -142,8 +142,8 @@ class OrderResource extends Resource
             'index' => Pages\ListOrders::route('/'),
             'create' => Pages\CreateOrder::route('/create'),
             'view' => Pages\ViewOrder::route('/{record}'),
-//            'edit' => Pages\EditOrder::route('/{record}/edit'),
-        'edit' => Pages\EditOrderResource::route('{record}/edit'),
+            'edit' => Pages\EditOrder::route('/{record}/edit'),
+//        'edit' => Pages\EditOrderResource::route('{record}/edit'),
         ];
     }
 }

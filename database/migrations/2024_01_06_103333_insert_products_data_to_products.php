@@ -30,7 +30,7 @@ return new class extends Migration
                     'category_id' => 1,
                     'color_id' => 1,
                     'size_id' => 3,
-                    'image' => "/storage/product_id_1_product_image",
+                    'image' => "product_id_1_product_image.png",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -44,7 +44,7 @@ return new class extends Migration
                     'category_id' => 8,
                     'color_id' => 5,
                     'size_id' => 7,
-                    'image' => "/storage/product_id_2_product_image",
+                    'image' => "product_id_2_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -58,7 +58,7 @@ return new class extends Migration
                     'category_id' => 5,
                     'color_id' => 9,
                     'size_id' => 4,
-                    'image' => "/storage/product_id_3_product_image",
+                    'image' => "product_id_3_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -72,7 +72,7 @@ return new class extends Migration
                     'category_id' => 11,
                     'color_id' => 10,
                     'size_id' => 10,
-                    'image' => "/storage/product_id_4_product_image",
+                    'image' => "product_id_4_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -86,7 +86,7 @@ return new class extends Migration
                     'category_id' => 2,
                     'color_id' => 2,
                     'size_id' => 4,
-                    'image' => "/storage/product_id_5_product_image",
+                    'image' => "product_id_5_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -100,7 +100,7 @@ return new class extends Migration
                     'category_id' => 12,
                     'color_id' => 17,
                     'size_id' => 6,
-                    'image' => "/storage/product_id_6_product_image",
+                    'image' => "product_id_6_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -114,7 +114,7 @@ return new class extends Migration
                     'category_id' => 13,
                     'color_id' => 6,
                     'size_id' => 3,
-                    'image' => "/storage/product_id_7_product_image",
+                    'image' => "product_id_7_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -128,7 +128,7 @@ return new class extends Migration
                     'category_id' => 14,
                     'color_id' => 18,
                     'size_id' => 4,
-                    'image' => "/storage/product_id_8_product_image",
+                    'image' => "product_id_8_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -142,7 +142,7 @@ return new class extends Migration
                     'category_id' => 6,
                     'color_id' => 4,
                     'size_id' => 2,
-                    'image' => "/storage/product_id_1_product_image",
+                    'image' => "product_id_1_product_image.png",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -156,7 +156,7 @@ return new class extends Migration
                     'category_id' => 15,
                     'color_id' => 11,
                     'size_id' => 4,
-                    'image' => "/storage/product_id_2_product_image",
+                    'image' => "product_id_2_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -170,7 +170,7 @@ return new class extends Migration
                     'category_id' => 16,
                     'color_id' => 7,
                     'size_id' => 3,
-                    'image' => "/storage/product_id_3_product_image",
+                    'image' => "product_id_3_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -184,7 +184,7 @@ return new class extends Migration
                     'category_id' => 17,
                     'color_id' => 1,
                     'size_id' => 10,
-                    'image' => "/storage/product_id_4_product_image",
+                    'image' => "product_id_4_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -198,7 +198,7 @@ return new class extends Migration
                     'category_id' => 18,
                     'color_id' => 19,
                     'size_id' => 10,
-                    'image' => "/storage/product_id_5_product_image",
+                    'image' => "product_id_5_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -212,7 +212,7 @@ return new class extends Migration
                     'category_id' => 19,
                     'color_id' => 3,
                     'size_id' => 4,
-                    'image' => "/storage/product_id_6_product_image",
+                    'image' => "product_id_6_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
                 [
@@ -226,7 +226,7 @@ return new class extends Migration
                     'category_id' => 20,
                     'color_id' => 10,
                     'size_id' => 3,
-                    'image' => "/storage/product_id_7_product_image",
+                    'image' => "product_id_7_product_image.jpg",
                     'created_at' => Carbon::now()
                 ],
              ];

@@ -94,19 +94,6 @@ class OrderResource extends Resource
                 TextColumn::make('quantity')
                 ->sortable(),
                 TextColumn::make('price')->label("Price"),
-                IconColumn::make('process')
-                    ->options([
-                        'heroicon-o-forward' => 'Pending',
-                        'heroicon-o-x-circle' => 'Denied',
-                        'heroicon-o-check-circle' => 'Approved',
-                        'heroicon-o-check' => 'Cancel',
-                    ])
-                    ->colors([
-                        'secondary' => 'Pending',
-                        'warning' => 'Denied',
-                        'success' => 'Approved',
-                        'info' => 'Cancel'
-                    ]),
                     TextColumn::make('created_at')
                         ->label('Created At')
                         ->toggleable(isToggledHiddenByDefault: true)
@@ -142,8 +129,8 @@ class OrderResource extends Resource
             'index' => Pages\ListOrders::route('/'),
             'create' => Pages\CreateOrder::route('/create'),
             'view' => Pages\ViewOrder::route('/{record}'),
-//            'edit' => Pages\EditOrder::route('/{record}/edit'),
-        'edit' => Pages\EditOrderResource::route('{record}/edit'),
+            'edit' => Pages\EditOrder::route('/{record}/edit'),
+//        'edit' => Pages\EditOrderResource::route('{record}/edit'),
         ];
     }
 }

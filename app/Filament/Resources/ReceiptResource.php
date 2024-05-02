@@ -32,6 +32,10 @@ class ReceiptResource extends Resource
     {
         return static::getModel()::count();
     }
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {
@@ -69,6 +73,19 @@ class ReceiptResource extends Resource
                 Tables\Columns\TextColumn::make('total')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\IconColumn::make('process')
+                    ->options([
+                        'heroicon-o-forward' => 'Pending',
+                        'heroicon-o-x-circle' => 'Denied',
+                        'heroicon-o-check-circle' => 'Approved',
+                        'heroicon-o-check' => 'Cancel',
+                    ])
+                    ->colors([
+                        'secondary' => 'Pending',
+                        'warning' => 'Denied',
+                        'success' => 'Approved',
+                        'info' => 'Cancel'
+                    ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -106,7 +123,7 @@ class ReceiptResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\OrdersRelationManager::class
         ];
     }
 
@@ -115,8 +132,9 @@ class ReceiptResource extends Resource
         return [
             'index' => Pages\ListReceipts::route('/'),
             'create' => Pages\CreateReceipt::route('/create'),
-//            'view' => Pages\ViewReceipt::route('/{record}'),
-            'edit' => Pages\EditReceipt::route('/{record}/edit'),
+            'view' => Pages\ViewReceipt::route('/{record}'),
+//            'edit' => Pages\EditReceipt::route('/{record}/edit'),
+            'edit' => Pages\EditReceiptsPage::route('/{record}/edit'),
         ];
     }
 }
